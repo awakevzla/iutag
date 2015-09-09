@@ -1,0 +1,146 @@
+body{
+
+	padding-top: 6em;
+
+}
+
+table{
+
+	text-align: center;
+
+}
+
+table th{
+
+	text-align: center !important;
+
+}
+
+.col-centered{
+
+	float: none;
+	margin: 0 auto;
+	
+}
+
+.center{
+
+	text-align: center;
+
+}
+
+.clickable{
+
+	cursor: pointer;
+
+}
+
+.usuario{
+
+	color:white;
+
+	font-weight: bold;
+
+	line-height: 3.5em;
+
+}
+
+.cintillo,.firma{
+	display:none;
+}
+
+.horario h1{
+
+	text-align: center;
+	font-size: 1em;
+
+}
+
+@media print {
+	#btnImprimir{
+		display: none;
+	}
+
+	body{
+
+		padding-top: 0px;
+
+	}
+
+	.pagina{
+		page-break-after: always;
+	}
+
+	.pagina:last-child{
+		page-break-after: avoid;
+	}
+
+	.firma{
+
+		width: 20%;
+		text-align: center;
+		border-top: 1px solid black;
+		margin-top: 4em;
+		vertical-align: top
+
+	}
+
+	.docente{
+
+		width: 30%;
+
+	}
+
+	.firmas{
+	
+		text-align: center;	
+
+	}
+
+	.cintillo{
+		display:inline-block;
+	}
+
+	.firma{
+		display: inline-block;
+		margin:4em 1em;
+	}
+	
+	.navbar{
+
+		display: none;
+
+	}
+
+	.container,.well{
+		width: 100%;
+		margin: 0;
+		padding: 0;
+		border:0;
+	}
+
+	table{
+
+		font-size: .8em;
+
+	}
+
+	table,th,td{
+
+		border:1px solid black !important;
+		border-collapse: collapse;
+
+	}
+
+	th,td{
+		width: 12% !important;
+		padding: .2em .5em !important;
+		text-align: center;
+
+	}
+
+	th:first-child,td:first-child{
+		width: 15% !important;
+	}
+
+}

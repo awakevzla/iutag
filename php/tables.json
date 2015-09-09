@@ -1,0 +1,258 @@
+{
+  "asignacion": {
+    "req": {
+      "cod_asignacion": {
+        "type": "int(11)"
+      },
+      "hora_entrada": {
+        "type": "time"
+      },
+      "horas": {
+        "type": "int(11)"
+      },
+      "hora_salida": {
+        "type": "time"
+      },
+      "cod_carga": {
+        "type": "int(11)"
+      },
+      "cod_aula": {
+        "type": "int(11)"
+      },
+      "dia_semana": {
+        "type": "enum('lunes','martes','miercoles','jueves','viernes')"
+      }
+    },
+    "opt": [],
+    "foreign": [
+      "cod_carga",
+      "cod_aula"
+    ],
+    "Primary": "cod_asignacion"
+  },
+  "aula": {
+    "req": {
+      "cod_aula": {
+        "type": "int(11)"
+      },
+      "nombre": {
+        "type": "varchar(100)"
+      },
+      "capacidad": {
+        "type": "int(11)"
+      }
+    },
+    "opt": {
+      "tipo": {
+        "type": "enum('laboratorio','aula')"
+      }
+    },
+    "foreign": [],
+    "Primary": "cod_aula"
+  },
+  "carga": {
+    "req": {
+      "cod_carga": {
+        "type": "int(11)"
+      },
+      "cod_seccion": {
+        "type": "int(11)"
+      },
+      "cod_uc": {
+        "type": "int(11)"
+      },
+      "cod_docente": {
+        "type": "int(11)"
+      }
+    },
+    "opt": [],
+    "foreign": [
+      "cod_seccion",
+      "cod_uc",
+      "cod_docente"
+    ],
+    "Primary": "cod_carga"
+  },
+  "docente": {
+    "req": {
+      "cod_docente": {
+        "type": "int(11)"
+      },
+      "nombre": {
+        "type": "varchar(200)"
+      },
+      "apellido": {
+        "type": "varchar(200)"
+      },
+      "cedula": {
+        "type": "varchar(20)"
+      },
+      "categoria": {
+        "type": "enum('instructor','asistente','agregado','asociado','titular')"
+      },
+      "condicion": {
+        "type": "enum('contratado','fijo')"
+      },
+      "dedicacion": {
+        "type": "enum('tiempo_completo','dedicacion_exclusiva','tiempo_convencional')"
+      },
+      "nacionalidad": {
+        "type": "enum('V','E','P')"
+      }
+    },
+    "opt": {
+      "observaciones": {
+        "type": "varchar(500)"
+      },
+      "cubiculo": {
+        "type": "varchar(10)"
+      }
+    },
+    "foreign": [],
+    "Primary": "cod_docente"
+  },
+  "periodo": {
+    "req": {
+      "cod_periodo": {
+        "type": "int(11)"
+      }
+    },
+    "opt": {
+      "fecha_inicio": {
+        "type": "date"
+      },
+      "fecha_culminacion": {
+        "type": "date"
+      }
+    },
+    "foreign": [],
+    "Primary": "cod_periodo"
+  },
+  "seccion": {
+    "req": {
+      "cod_seccion": {
+        "type": "int(11)"
+      },
+      "cod_trimestre": {
+        "type": "int(11)"
+      },
+      "cod_periodo": {
+        "type": "int(11)"
+      }
+    },
+    "opt": {
+      "nro": {
+        "type": "int(11)"
+      }
+    },
+    "foreign": [
+      "cod_trimestre",
+      "cod_periodo"
+    ],
+    "Primary": "cod_seccion"
+  },
+  "trayecto": {
+    "req": {
+      "cod_trayecto": {
+        "type": "int(11)"
+      },
+      "nombre": {
+        "type": "varchar(100)"
+      }
+    },
+    "opt": [],
+    "foreign": [],
+    "Primary": "cod_trayecto"
+  },
+  "trimestre": {
+    "req": {
+      "cod_trimestre": {
+        "type": "int(11)"
+      },
+      "nombre": {
+        "type": "varchar(100)"
+      },
+      "cod_trayecto": {
+        "type": "int(11)"
+      }
+    },
+    "opt": [],
+    "foreign": [
+      "cod_trayecto"
+    ],
+    "Primary": "cod_trimestre"
+  },
+  "uc": {
+    "req": {
+      "cod_uc": {
+        "type": "int(11)"
+      },
+      "nombre_uc": {
+        "type": "varchar(100)"
+      },
+      "nro_semanas": {
+        "type": "int(11)"
+      },
+      "cod_trimestre": {
+        "type": "int(11)"
+      },
+      "horas_semanales": {
+        "type": "int(11)"
+      }
+    },
+    "opt": [],
+    "foreign": [
+      "cod_trimestre"
+    ],
+    "Primary": "cod_uc"
+  },
+  "usuario": {
+    "req": {
+      "cod_usuario": {
+        "type": "int(11)"
+      },
+      "nombre": {
+        "type": "varchar(150)"
+      },
+      "apellido": {
+        "type": "varchar(150)"
+      },
+      "cedula": {
+        "type": "varchar(20)"
+      },
+      "usuario": {
+        "type": "varchar(20)"
+      },
+      "clave": {
+        "type": "varchar(20)"
+      },
+      "correo": {
+        "type": "varchar(150)"
+      }
+    },
+    "opt": {
+      "direccion": {
+        "type": "varchar(250)"
+      },
+      "telefono": {
+        "type": "varchar(50)"
+      }
+    },
+    "foreign": [],
+    "Primary": "cod_usuario"
+  },
+  "auditoria_sesion": {
+    "req": {
+      "id_usuario": {
+        "type": "int(11)"
+      },
+      "evento": {
+        "type": "varchar(50)"
+      },
+      "ip": {
+        "type": "int(11)"
+      }
+    },
+    "Primary": "id"
+  }
+}

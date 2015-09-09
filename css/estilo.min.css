@@ -1,0 +1,13 @@
+body {
+  padding-top: 6em; }
+
+.col-centered {
+  float: none;
+  margin: 0 auto; }
+
+.capitalizar {
+  text-transform: capitalize; }
+
+.usuario {
+  color: white;
+  line-height: 3.5em; }
