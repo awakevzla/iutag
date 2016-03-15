@@ -41,6 +41,20 @@
 			<label>Clave</label>
 			<input type="password" name="clave" required class="form-control" ng-model="nuevo.clave" placeholder="Clave">
 		</div>
+		<div class="form-group">
+			<label for="pregunta_id">Pregunta Secreta</label>
+			<select name="pregunta_id" id="pregunta_id" required class="form-control" ng-model="nuevo.pregunta_id">
+				<option value="">Seleccione...</option>
+				<option value="1">Nombre de su madre</option>
+				<option value="2">Mejor amigo de la infancia</option>
+				<option value="3">Nombre de su primera mascota</option>
+				<option value="4">Lugar de nacimiento</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label>Respuesta</label>
+			<input type="text" ng-model="nuevo.respuesta" required placeholder="Respuesta" class="form-control">
+		</div>
 		<button data-ng-if="!!nuevo.cod_usuario" type="submit" class="btn btn-primary">Guardar</button>
 		<button data-ng-if="!nuevo.cod_usuario" type="submit" class="btn btn-primary">Crear</button>
 		<button data-ng-if="!nuevo.cod_usuario" type="submit" data-ng-click="otro()" class="btn btn-primary">Crear & Nuevo</button>

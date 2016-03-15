@@ -1,5 +1,4 @@
-<?php 
-
+<?php
 	header('Content-Type: application/json');
 
 	function jsonError($number,$message,$die = false){
@@ -56,9 +55,9 @@
 
 	    	}catch(PDOException $ex){
 
-	    		$this->error[]=array(CE1,"No se pudo acceder a la base de datos");
+	    		$this->error[]=array('CE1',"No se pudo acceder a la base de datos");
 
-	    		$this->rollback();
+	    		#$this->rollback();
 
 	    	}
 
@@ -100,8 +99,11 @@
 				);
 
 			}else{
-
+				try{
 				$this->execute($this->str,$this->data,$done,$this->table);
+				}catch (PDOException $e){
+					return $e->getMessage();
+				}
 
 			}
 
@@ -341,6 +343,13 @@
 
 		session_start();
 
+		$db = new db("root","20296572");
+
+		$auditoria["id_usuario"]=$_SESSION["usuario"]["cod_usuario"];
+		$auditoria["evento"]="SALIDA";
+		$auditoria["ip"]=get_client_ip();
+		$db->add("auditoria_sesion")->insert($auditoria)->exe(function($cod_aula){})->commit();
+
 		unset($_SESSION["user_info"]);
 
 		session_unset();
@@ -352,8 +361,9 @@
 	function login($user,$pass){
 
 		$db = new db("root","20296572");
-
+		global $user_;
 		global $response;
+		$user_=$user;
 
 		$response = false;
 
@@ -361,18 +371,33 @@
 			"clave = :clave AND usuario = :usuario",true,array("clave" => $pass,"usuario" => $user))->exe(function($data){
 
 			global $response;
+			global $user_;
 
 			if(count($data) == 1){
-
+				if ($data[0]["baneado"]!=0){
+					jsonError("BAN","Usuario Baneado.",true);
+				}
+				resetTries($user_);
 				$response = $data[0];
 
-			}else
-				jsonError("S1","Nombre de usuario o clave incorrecto.",true);
+			}else{
+				if (checkUser($user_)!=1){
+					jsonError("USER", "El Usuario ingresado, no existe. Intente nuevamente o comuiquese con el administrador!", true);
+				}
+				$cant=get_tries($user_);
+				if ($cant>3){
+					ban_user($user_);
+					jsonError("BAN","Usuario Baneado.",true);
+				}else{
+					addTry($user_);
+					jsonError("CLAVE","Clave Incorrecta, recuerde que al tercer intento, se bloquea el usuario!",true);
+				}
+			}
 
 		});
 		$auditoria["id_usuario"]=$response["cod_usuario"];
-		$auditoria["evento"]="entrada";
-		$auditoria["ip"]=1;
+		$auditoria["evento"]="INGRESO";
+		$auditoria["ip"]=get_client_ip();
 		$db->add("auditoria_sesion")->insert($auditoria)->exe(function($cod_aula){})->commit();
 
 		session_start();
@@ -384,4 +409,61 @@
 		return $response;
 	}
 
+	function checkUser($user){
+		global $cant;
+		$db = new db("root","20296572");
+		$db->add("usuario")->select("*","usuario")->where(
+			"usuario = :usuario",true,array("usuario" => $user))->exe(function($data){
+			global $cant;
+			$cant = count($data);
+		});
+		return $cant;
+	}
+
+	function addTry($user){
+		#$db = new db("root","20296572");
+		$con = new PDO("mysql:host=localhost;dbname=iutag;charset=utf8", "","20296572");
+		$stm=$con->prepare("UPDATE usuario SET intentos=intentos+1 WHERE usuario='$user'");
+		$stm->execute();
+	}
+
+	function ban_user($user){
+		#$db = new db("root","20296572");
+		$con = new PDO("mysql:host=localhost;dbname=iutag;charset=utf8", "root","20296572");
+		$stm=$con->prepare("UPDATE usuario SET baneado=1 WHERE usuario='$user'");
+		$stm->execute();
+	}
+
+	function resetTries($user){
+		$con = new PDO("mysql:host=localhost;dbname=iutag;charset=utf8", "root","20296572");
+		$stm=$con->prepare("UPDATE usuario SET intentos=0 WHERE usuario='$user'");
+		$stm->execute();
+	}
+
+	function get_tries($user){
+		$con = new PDO("mysql:host=localhost;dbname=iutag;charset=utf8", "root","20296572");
+		$stm=$con->prepare("SELECT intentos from usuario WHERE usuario='$user'");
+		$stm->execute();
+		$intentos=$stm->fetchAll();
+		return $intentos[0]["intentos"];
+	}
+
+	function get_client_ip() {
+		$ipaddress = '';
+		if (getenv('HTTP_CLIENT_IP'))
+			$ipaddress = getenv('HTTP_CLIENT_IP');
+		else if(getenv('HTTP_X_FORWARDED_FOR'))
+			$ipaddress = getenv('HTTP_X_FORWARDED_FOR');
+		else if(getenv('HTTP_X_FORWARDED'))
+			$ipaddress = getenv('HTTP_X_FORWARDED');
+		else if(getenv('HTTP_FORWARDED_FOR'))
+			$ipaddress = getenv('HTTP_FORWARDED_FOR');
+		else if(getenv('HTTP_FORWARDED'))
+			$ipaddress = getenv('HTTP_FORWARDED');
+		else if(getenv('REMOTE_ADDR'))
+			$ipaddress = getenv('REMOTE_ADDR');
+		else
+			$ipaddress = 'UNKNOWN';
+		return $ipaddress;
+	}
  ?>

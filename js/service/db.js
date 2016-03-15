@@ -12,7 +12,7 @@ addService({
                     }
                 ).success(function(data, status){
 
-                    console.log(data);
+                    //console.log(data);
 
                     success(data,status);
 

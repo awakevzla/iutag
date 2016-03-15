@@ -34,9 +34,7 @@
 					<span class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="#">
-					<img alt="Brand" src="img/iutag.png" height="183" width="210" style="
-    width: 10%; height: auto;
-"> SADCA Iutag
+					<img alt="Brand" src="img/iutag.png" height="183" width="210" style="width: 10%; height: auto;"> SADCA Iutag
 				</a>
 			</div>
 			<div class="pull-right usuario" data-ng-if="usuario.accedio">
@@ -59,9 +57,9 @@
 	<script src="js/jquery-1.11.1.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script>
-		$(document).on("blur", "input", function () {
+		/*$(document).on("blur", "input:not(#captcha)", function () {
 			$(this).val($(this).val().toUpperCase());
-		});
+		});*/
 	</script>
 	<script src="js/libreries/jquery-ui.min.js"></script>
 	<script src="js/libreries/angular.min.js"></script>

@@ -1,8 +1,8 @@
 <?php 
 	
 	include "mysql.php";
-
-	$db = new db("root","20296572");
+	include "parametrosBD.php";
+	$db = new db(usuario,clave);
 
 	$db
 	->add("seccion")

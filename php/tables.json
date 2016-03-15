@@ -224,9 +224,15 @@
         "type": "varchar(20)"
       },
       "clave": {
-        "type": "varchar(20)"
+        "type": "varchar(32)"
       },
       "correo": {
+        "type": "varchar(150)"
+      },
+      "pregunta_id": {
+        "type": "int(11)"
+      },
+      "respuesta": {
         "type": "varchar(150)"
       }
     },
@@ -236,6 +242,12 @@
       },
       "telefono": {
         "type": "varchar(50)"
+      },
+      "intentos":{
+        "type":"int(11)"
+      },
+      "baneado":{
+        "type":"tinyint(1)"
       }
     },
     "foreign": [],

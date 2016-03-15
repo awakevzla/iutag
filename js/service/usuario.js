@@ -15,9 +15,8 @@ addService({
 
             },
         	acceder:function(nombre, clave, done){
-
         		db.post("php/acceso.php",{user:nombre,clave:clave},function(data){
-
+                    console.log(data);
         			if(data.cod_usuario != undefined){
 
                         service.info = data;
@@ -31,8 +30,23 @@ addService({
                         $location.path("/inicio");
         				
         			}else{
-
-                        alert("El nombre de usuario o la clave no coincide.");
+                        switch (data.error[0]){
+                            case 'NULL':
+                                alert("El nombre de usuario o la clave no coincide.");
+                                break;
+                            case 'BAN':
+                                alert("Usuario bloqueado, comuniquese con el administrador!");
+                                break;
+                            case 'USER':
+                                alert(data.error[1]);
+                                break;
+                            case 'CLAVE':
+                                alert(data.error[1]);
+                                break;
+                            default:
+                                alert("Ocurrio un inconveniente al intentar conectar!");
+                                break;
+                        }
 
                     }
         			

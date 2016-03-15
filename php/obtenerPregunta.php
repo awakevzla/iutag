@@ -5,12 +5,12 @@
 	$db = new db(usuario,clave);
 
 	$db
-	->add("periodo")
-	->select()
+	->add("usuario")
+	->select("pregunta_id, respuesta")
 	->where($_POST)
 	->exe(function($data){
 
-		echo json_encode($data[0]);
+		echo json_encode($data);
 		
 	});
  ?>

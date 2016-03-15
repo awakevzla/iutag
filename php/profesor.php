@@ -1,9 +1,8 @@
 <?php 
 	
 	include "mysql.php";
-
-	//Conecta a la base de datos con el usuario 'root' y la clave ''
-	$db = new db("root","20296572");
+	include "parametrosBD.php";
+	$db = new db(usuario,clave);
 
 	$profesor;
 

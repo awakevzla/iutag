@@ -1,8 +1,8 @@
 <?php 
 	
 	include "mysql.php";
-
-	$db = new db("root","20296572");
+	include "parametrosBD.php";
+	$db = new db(usuario,clave);
 
 	for ($i=0; $i < $_POST["nro_seccion"]; $i++) { 
 

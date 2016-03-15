@@ -13,8 +13,8 @@ $mail->Password = '123abc__';
 
 $datos=array();
 include "mysql.php";
-
-$db = new db("root","20296572");
+include "parametrosBD.php";
+$db = new db(usuario,clave);
 $db
     ->add("usuario")
     ->select()
@@ -27,14 +27,14 @@ $db
 $mail->FromName = 'sadcaiutag@gmail.com';
 $mail->From = '123abc__';//email de remitente desde donde se envía el correo.
 
-$mail->AddAddress("robertty55@gmail.com", 'Destinatario');//destinatario que va a recibir el correo
+$mail->AddAddress($datos["correo"], 'Destinatario');//destinatario que va a recibir el correo
 
 /*$mail->AddCC("$correo_emp", 'copia');//envía una copia del correo a la dirección especificada
 
 $mail->AddCC('recepcionvtelca@gmail.com', 'copia');//envía una copia del correo a la dirección especificada*/
 
 
-$mail->Subject = 'Restauración de Contraseña';
+$mail->Subject = 'Restauración de Contraseña - SADCA IUTAG';
 
 $mail->AltBody = 'Sistema administrativo de carga académica (SADCA)';//cuerpo con texto plano
 
@@ -42,7 +42,7 @@ $mail->MsgHTML("Su contraseña es: ".$datos["clave"]);//cuerpo con html
 if(!$mail->Send()) {//finalmente enviamos el email
     $respuesta["respuesta"]=0;
     $respuesta["error"]=$mail->ErrorInfo;//si no se envía correctamente se muestra el error que ocurrió
-    echo json_encode($error);
+    echo json_encode($respuesta);
 } else {
     $respuesta["respuesta"]=1;
     echo json_encode($respuesta);

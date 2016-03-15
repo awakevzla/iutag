@@ -19,6 +19,7 @@
             <th>Cédula</th>
             <th>Dirección</th>
             <th>Teléfono</th>
+            <th>Correo</th>
             <th>Acciones</th>
           </tr>
         </thead>
@@ -28,6 +29,7 @@
                 <td>{{usuario.cedula}}</td>
                 <td>{{usuario.direccion}}</td>
                 <td>{{usuario.telefono}}</td>
+                <td>{{usuario.correo}}</td>
             	<td>
             		<div class="btn-group">
         		    	<a href="#/usuario/{{usuario.cod_usuario}}" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
