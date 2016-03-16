@@ -20,6 +20,7 @@
             <th>Dirección</th>
             <th>Teléfono</th>
             <th>Correo</th>
+            <th>Baneado</th>
             <th>Acciones</th>
           </tr>
         </thead>
@@ -30,10 +31,12 @@
                 <td>{{usuario.direccion}}</td>
                 <td>{{usuario.telefono}}</td>
                 <td>{{usuario.correo}}</td>
+                <td>{{usuario.baneado_txt}}</td>
             	<td>
             		<div class="btn-group">
         		    	<a href="#/usuario/{{usuario.cod_usuario}}" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
         		    	<a data-ng-click="eliminar(usuario)" class="btn btn-default" aria-label="Center Align"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+        		    	<a data-ng-click="desbanear(usuario)" class="btn btn-default" aria-label="Center Align"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
         		    </div>
             	</td>
         	</tr>

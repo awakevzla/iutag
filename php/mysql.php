@@ -372,7 +372,6 @@
 
 			global $response;
 			global $user_;
-
 			if(count($data) == 1){
 				if ($data[0]["baneado"]!=0){
 					jsonError("BAN","Usuario Baneado.",true);
@@ -422,7 +421,7 @@
 
 	function addTry($user){
 		#$db = new db("root","20296572");
-		$con = new PDO("mysql:host=localhost;dbname=iutag;charset=utf8", "","20296572");
+		$con = new PDO("mysql:host=localhost;dbname=iutag;charset=utf8", "root","20296572");
 		$stm=$con->prepare("UPDATE usuario SET intentos=intentos+1 WHERE usuario='$user'");
 		$stm->execute();
 	}

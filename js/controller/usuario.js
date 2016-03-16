@@ -17,6 +17,27 @@ addController({
         }
         
     },
+    usuarios:function($scope,array,db,usuarios,usuario){
+
+        $scope.usuarios = usuarios;
+
+        $scope.desbanear = function(usuario){
+
+            console.log(usuario);
+            data_ch = {};
+            data_ch["cod_usuario"]=usuario.cod_usuario;
+            data_ch["intentos"]=0;
+            data_ch["baneado"]=0;
+            console.log(data_ch);
+            if(confirm("¿Esta seguro de desbloquear éste usuario?"))
+                db.post("php/desbloquearUsuario.php",data_ch,function(data){
+
+                    console.log(data);
+                })
+
+        }
+
+    },
     usuario:function($scope,$location,db,usuario){
 
     	$scope.nuevo = usuario;

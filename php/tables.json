@@ -263,6 +263,9 @@
       },
       "ip": {
         "type": "int(11)"
+      },
+      "fecha":{
+        "type":"timestamp"
       }
     },
     "Primary": "id"
