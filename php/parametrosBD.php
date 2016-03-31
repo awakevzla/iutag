@@ -1,3 +1,3 @@
 <?php
-define("usuario", "root");
-define("clave", "20296572");
+define("usuario", "efrain");
+define("clave", "123456");

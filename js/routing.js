@@ -14,6 +14,12 @@ app.config(['$routeProvider',
             controller:'acceder'
         }).
 
+        // Clave
+        when('/clave',{
+            templateUrl: 'vistas/clave.php',
+            controller: "clave"
+        }).
+
         // Imprimir
         when('/imprimir/aula-:cod_aula/:cod_periodo',{
             templateUrl: 'vistas/imprimirAula.php',

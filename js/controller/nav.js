@@ -18,7 +18,8 @@ addController({
             {name : "Secciones",href : "/secciones"},
             {name : "Periodos",href : "/periodos"},
             {name : "Cargas",href : "/cargas"},
-            {name : "Usuarios",href : "/usuarios"}
+            {name : "Usuarios",href : "/usuarios"},
+            {name : "Actualizar Datos",href : "/clave"}
 
         ];
 
@@ -48,7 +49,8 @@ addController({
                         {name : "UCs",href : "/ucs"},
                         {name : "Secciones",href : "/secciones"},
                         {name : "Periodos",href : "/periodos"},
-                        {name : "Cargas",href : "/cargas"}
+                        {name : "Cargas",href : "/cargas"},
+                        {name : "Clave",href : "/clave"}
 
                     ];
 

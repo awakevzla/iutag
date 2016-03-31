@@ -1,4 +1,7 @@
 <?php
+define("usuario_pdo", "efrain");
+define("clave_pdo", "123456");
+define("db_pdo", "iutag");
 	header('Content-Type: application/json');
 
 	function jsonError($number,$message,$die = false){
@@ -27,7 +30,7 @@
 		
 		function __construct($usuario,$clave){
 
-			$this->database = "iutag";
+			$this->database = db_pdo;
 
 			$this->action = "";
 
@@ -343,7 +346,7 @@
 
 		session_start();
 
-		$db = new db("root","20296572");
+		$db = new db(usuario_pdo,clave_pdo);
 
 		$auditoria["id_usuario"]=$_SESSION["usuario"]["cod_usuario"];
 		$auditoria["evento"]="SALIDA";
@@ -360,7 +363,7 @@
 
 	function login($user,$pass){
 
-		$db = new db("root","20296572");
+		$db = new db(usuario_pdo,clave_pdo);
 		global $user_;
 		global $response;
 		$user_=$user;
@@ -410,7 +413,7 @@
 
 	function checkUser($user){
 		global $cant;
-		$db = new db("root","20296572");
+		$db = new db(usuario_pdo,clave_pdo);
 		$db->add("usuario")->select("*","usuario")->where(
 			"usuario = :usuario",true,array("usuario" => $user))->exe(function($data){
 			global $cant;
@@ -420,27 +423,25 @@
 	}
 
 	function addTry($user){
-		#$db = new db("root","20296572");
-		$con = new PDO("mysql:host=localhost;dbname=iutag;charset=utf8", "root","20296572");
+		$con = new PDO("mysql:host=localhost;dbname=".db_pdo.";charset=utf8", usuario_pdo,clave_pdo);
 		$stm=$con->prepare("UPDATE usuario SET intentos=intentos+1 WHERE usuario='$user'");
 		$stm->execute();
 	}
 
 	function ban_user($user){
-		#$db = new db("root","20296572");
-		$con = new PDO("mysql:host=localhost;dbname=iutag;charset=utf8", "root","20296572");
+		$con = new PDO("mysql:host=localhost;dbname=".db_pdo.";charset=utf8", usuario_pdo,clave_pdo);
 		$stm=$con->prepare("UPDATE usuario SET baneado=1 WHERE usuario='$user'");
 		$stm->execute();
 	}
 
 	function resetTries($user){
-		$con = new PDO("mysql:host=localhost;dbname=iutag;charset=utf8", "root","20296572");
+		$con = new PDO("mysql:host=localhost;dbname=".db_pdo.";charset=utf8", usuario_pdo,clave_pdo);
 		$stm=$con->prepare("UPDATE usuario SET intentos=0 WHERE usuario='$user'");
 		$stm->execute();
 	}
 
 	function get_tries($user){
-		$con = new PDO("mysql:host=localhost;dbname=iutag;charset=utf8", "root","20296572");
+		$con = new PDO("mysql:host=localhost;dbname=".db_pdo.";charset=utf8", usuario_pdo,clave_pdo);
 		$stm=$con->prepare("SELECT intentos from usuario WHERE usuario='$user'");
 		$stm->execute();
 		$intentos=$stm->fetchAll();
