@@ -19,7 +19,23 @@
     </fieldset>
 </form>
 <script>
+	function agregarIntento(usuario){
+		$.ajax({
+			url: "php/agregarIntento.php",
+			data:{usuario:usuario},
+			dataType: "text",
+			type: "POST",
+			error: function (resp) {
+				alert("!Ha ocurrido un problema, comuníquese con el administrador!");
+				console.log(resp.responseText);
+			},
+			success: function (response) {
+				console.log(response);
+			}
+		});
+	}
 	var respuesta="";
+	var baneado="";
 	$("button[type=submit]").attr("disabled", true);
 	$(document).on("click", "#restaurarClave", function () {
 		usuario=$("#txtUsuario").val();
@@ -41,6 +57,7 @@
 				if (response.length==1){
 					$("#pregunta_id").val(response[0]["pregunta_id"])
 					respuesta=response[0]["respuesta"];
+					baneado=response[0]["baneado"];
 					$("#restaurar").modal();
 				}else{
 					alert("Ocurrio un inconveniente, intente nuevamente!");
@@ -92,7 +109,8 @@
 	$(document).on("click", "#btnRestaurar", function () {
 		respuesta_tmp=$("#respuesta").val();
 		usuario=$("#txtUsuario").val();
-		if (respuesta_tmp==respuesta){
+		console.log(baneado);
+		if (respuesta_tmp==respuesta || baneado=="1"){
 			$.ajax({
 				url: "php/enviarClave.php",
 				data:{usuario:usuario},
@@ -103,17 +121,22 @@
 					$("#enviando").modal();
 				},
 				error: function (resp) {
-					alert("!Ha ocurrido un problema, comuníquese con el administrador!");
-					console.log(resp.responseText);
+					if (resp.responseText=="usuario_baneado"){
+						alert("!Usuario Bloqueado, comuníquese con el administrador!");
+					}else{
+						alert("!Ha ocurrido un problema, comuníquese con el administrador!");
+					}
+					$("#enviando").modal("hide");
 				},
 				success: function (response) {
 					$("#enviando").modal("hide");
 					alert("Clave enviada a su correo electronico.!");
-					location.reload();
+					console.log(response);
 				}
 			});
 		}else{
 			alert("Respuesta incorrecta, intente nuevamente o comuniquese con el administrador!");
+			agregarIntento(usuario);
 			return;
 		}
 	});

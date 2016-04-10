@@ -5,8 +5,7 @@
 	$db = new db(usuario,clave);
 
 	$usuario;
-/*json($_POST);
-die();*/
+	$_POST["clave"]=md5($_POST["clave"]);
 	$db->add("usuario")->insert($_POST)->exe(function($cod_usuario){
 
 		global $usuario;
@@ -14,6 +13,11 @@ die();*/
 		$usuario = $cod_usuario;
 
 	})->commit();
+	$auditoria["id_usuario"]=$usuario["cod_usuario"];
+	$auditoria["evento"]="REGISTRAR";
+	$auditoria["ip"]=get_client_ip();
+	$auditoria["descripcion"]="CREACION DE USUARIO DEL USUARIO, LOGIN: ".$_POST["usuario"];
+	registro_operacion($auditoria);
 
 	json($usuario);
 

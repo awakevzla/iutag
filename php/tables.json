@@ -268,6 +268,11 @@
         "type":"timestamp"
       }
     },
+    "opt":{
+      "descripcion":{
+        "type":"varchar(500)"
+      }
+    },
     "Primary": "id"
   }
 }

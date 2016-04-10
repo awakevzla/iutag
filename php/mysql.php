@@ -1,6 +1,6 @@
 <?php
-define("usuario_pdo", "efrain");
-define("clave_pdo", "123456");
+define("usuario_pdo", "root");
+define("clave_pdo", "");
 define("db_pdo", "iutag");
 	header('Content-Type: application/json');
 
@@ -351,6 +351,7 @@ define("db_pdo", "iutag");
 		$auditoria["id_usuario"]=$_SESSION["usuario"]["cod_usuario"];
 		$auditoria["evento"]="SALIDA";
 		$auditoria["ip"]=get_client_ip();
+		$auditoria["descripcion"]="SALIDA DEL USUARIO ID: ".$_SESSION["usuario"]["cod_usuario"];
 		$db->add("auditoria_sesion")->insert($auditoria)->exe(function($cod_aula){})->commit();
 
 		unset($_SESSION["user_info"]);
@@ -400,6 +401,7 @@ define("db_pdo", "iutag");
 		$auditoria["id_usuario"]=$response["cod_usuario"];
 		$auditoria["evento"]="INGRESO";
 		$auditoria["ip"]=get_client_ip();
+		$auditoria["descripcion"]="INGRESO DEL USUARIO ID: ".$response["cod_usuario"];
 		$db->add("auditoria_sesion")->insert($auditoria)->exe(function($cod_aula){})->commit();
 
 		session_start();
@@ -409,6 +411,11 @@ define("db_pdo", "iutag");
     	session_write_close(); 
 
 		return $response;
+	}
+
+	function registro_operacion($auditoria){
+		$db = new db(usuario_pdo,clave_pdo);
+		$db->add("auditoria_sesion")->insert($auditoria)->exe(function($cod_aula){})->commit();
 	}
 
 	function checkUser($user){

@@ -10,10 +10,10 @@ addController({
                 alert("Debe ingresar la contraseña anterior!");
                 return;
             }
-            if ($scope.anterior.clave!=usuario.info.clave){
+            /*if ($scope.anterior.clave!=usuario.info.clave){
                 alert("La contraseña anterior no es correcta.!");
                 return;
-            }
+            }*/
             var re = /^(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
             var valid=re.test($scope.nuevo.clave);
             if (!valid){
@@ -24,14 +24,20 @@ addController({
                 return;
             }
             $scope.nuevo.cod_usuario=usuario.info.cod_usuario;
+            $scope.nuevo.clave_anterior=$scope.anterior.clave;
             db.post("php/modificarUsuario.php", $scope.nuevo, function (data) {
+                if (data=="clave_anterior_invalida"){
+                    alert("La contraseña anterior no es correcta.!");
+                    location.reload();
+                }
                 if (!data.cod_usuario){
                     alert("Ocurrió un inconveniente al actualizar, intente nuevamente!");
                     location.reload();
                 }
+
                 alert("Actualización completada.");
                 info=angular.fromJson(localStorage.usuario);
-                info.clave=$scope.nuevo.clave;
+                info.clave=data.clave_nueva;
                 localStorage.usuario = angular.toJson(info);
                 location.reload();
             })

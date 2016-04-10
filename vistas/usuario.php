@@ -37,7 +37,7 @@
 			<label>Usuario</label>
 			<input type="text" name="usuario" required class="form-control" ng-model="nuevo.usuario" placeholder="Usuario">
 		</div>
-		<div class="form-group">
+		<div data-ng-if="!nuevo.cod_usuario" class="form-group">
 			<label>Clave</label>
 			<input type="password" name="clave" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required class="form-control" ng-model="nuevo.clave" placeholder="Clave">
 		</div>

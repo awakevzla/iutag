@@ -60,7 +60,7 @@ app.controller({
                 });
             }else
         	db.post("php/crearAula.php",$scope.nuevo,function(data){
-
+                console.log(data);
         		if(!!data && !!data.cod_aula){
 
                     if($scope.accion == "nuevo"){

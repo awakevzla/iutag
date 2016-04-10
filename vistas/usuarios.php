@@ -34,9 +34,10 @@
                 <td>{{usuario.baneado_txt}}</td>
             	<td>
             		<div class="btn-group">
-        		    	<a href="#/usuario/{{usuario.cod_usuario}}" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
-        		    	<a data-ng-click="eliminar(usuario)" class="btn btn-default" aria-label="Center Align"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
-        		    	<a data-ng-click="desbanear(usuario)" class="btn btn-default" aria-label="Center Align"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+        		    	<a href="#/usuario/{{usuario.cod_usuario}}" class="btn btn-default" aria-label="Left Align" title="Modificar Usuario"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+        		    	<a data-ng-click="eliminar(usuario)" class="btn btn-default" aria-label="Center Align" title="Eliminar Usuario"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+        		    	<a data-ng-click="desbanear(usuario)" class="btn btn-default" aria-label="Center Align" title="Desbloquear Usuario"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+        		    	<a data-ng-click="cambiarclave(usuario)" class="btn btn-default" aria-label="Center Align" title="Restaurar Clave"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></a>
         		    </div>
             	</td>
         	</tr>

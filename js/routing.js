@@ -20,6 +20,12 @@ app.config(['$routeProvider',
             controller: "clave"
         }).
 
+        // Reportes
+        when('/reportes',{
+            templateUrl: 'vistas/reportes.php',
+            controller: "reportes"
+        }).
+
         // Imprimir
         when('/imprimir/aula-:cod_aula/:cod_periodo',{
             templateUrl: 'vistas/imprimirAula.php',

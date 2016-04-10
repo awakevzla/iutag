@@ -6,7 +6,7 @@
 
 	$db
 	->add("usuario")
-	->select("pregunta_id, respuesta")
+	->select("pregunta_id, respuesta, baneado")
 	->where($_POST)
 	->exe(function($data){
 

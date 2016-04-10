@@ -30,6 +30,19 @@ addController({
                 })
 
         }
+        $scope.cambiarclave = function (usuario) {
+            data_ch = {};
+            data_ch["cod_usuario"] = usuario.cod_usuario;
+            data_ch["intentos"] = 0;
+            data_ch["baneado"] = 0;
+            data_ch["correo"] = usuario.correo;
+            if (confirm("¿Está seguro de restaurar contraseña?"))
+                db.post("php/restaurarClaveUsuario.php", data_ch, function (data) {
+
+                    console.log(data);
+                })
+
+        }
 
     },
     usuario: function ($scope, $location, db, usuario) {
@@ -45,11 +58,13 @@ addController({
         $scope.tipos = [{text: "Administrador", value: "administrador"}, {text: "Operador", value: "operador"}]
 
         $scope.crear = function () {
-            var re = /^(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
-            var valid=re.test($scope.formulario.clave.$modelValue);
-            if (!valid){
-                alert("La contraseña no cumple con los parámetros básicos\nDebe tener:\nAl menos una letra mayúscula, Un símbolo, Un número y al menos 8 caracteres.");
-                return;
+            if ($scope.formulario.clave){
+                var re = /^(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
+                var valid=re.test($scope.formulario.clave.$modelValue);
+                if (!valid){
+                    alert("La contraseña no cumple con los parámetros básicos\nDebe tener:\nAl menos una letra mayúscula, Un símbolo, Un número y al menos 8 caracteres.");
+                    return;
+                }
             }
             if ($scope.formulario.$valid == false) {
 

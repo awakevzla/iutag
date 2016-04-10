@@ -7,7 +7,7 @@ addController({
 
             if(confirm("Esta seguro de que desea eliminar este docente:\nToda la información sera eliminada permanentemente."))
                 db.post("php/eliminarDocente.php",docente,function(data){
-
+                    console.log(data);
                     if(data.cod_docente != undefined)
                         array.remove(docentes,docente);
                     else

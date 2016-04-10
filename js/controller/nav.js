@@ -18,6 +18,7 @@ addController({
             {name : "Secciones",href : "/secciones"},
             {name : "Periodos",href : "/periodos"},
             {name : "Cargas",href : "/cargas"},
+            {name : "Reportes",href : "/reportes"},
             {name : "Usuarios",href : "/usuarios"},
             {name : "Actualizar Datos",href : "/clave"}
 

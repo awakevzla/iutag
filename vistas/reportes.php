@@ -1,9 +1,13 @@
-<form name="formulario" data-ng-submit="actualizar()" class="well col-sm-7 col-centered" novalidate>
+<div class="well col-sm-7 col-centered">
     <fieldset>
-        <h1>Cambiar Datos personales</h1>
+        <h1>Reportes</h1>
         <div class="form-group">
-            <label>Clave Anterior</label>
-            <input type="password" name="anterior_clave" ng-model="anterior.clave" class="form-control" placeholder="Clave Anterior">
+            <label for="tipo_reporte">Tipo de Reporte</label>
+            <select id="tipo_reporte" class="form-control">
+                <option value="">Seleccione...</option>
+                <option value="1">Reporte de Acceso</option>
+                <option value="2">Reporte de Operaciones</option>
+            </select>
         </div>
         <div class="form-group">
             <label>Clave Nueva</label>
@@ -25,4 +29,4 @@
         </div>
         <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-save"></span> Actualizar</button>
     </fieldset>
-</form>
+</div>
