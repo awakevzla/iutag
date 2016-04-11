@@ -23,7 +23,26 @@ app.config(['$routeProvider',
         // Reportes
         when('/reportes',{
             templateUrl: 'vistas/reportes.php',
-            controller: "reportes"
+            controller: "reportes",
+                resolve:{
+                    usuarios:function($route,db,$q,$location,usuario){
+
+                        if(usuario.info.tipo != "administrador"){
+                            $location.path("/");
+                        }
+
+                        var deferred = $q.defer();
+
+                        db.post("php/obtenerUsuarios.php",{},function(data){
+
+                            deferred.resolve(data);
+
+                        });
+
+                        return deferred.promise;
+
+                    }
+                }
         }).
 
         // Imprimir

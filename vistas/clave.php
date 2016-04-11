@@ -10,7 +10,7 @@
             <input type="password" name="clave" ng-model="nuevo.clave" class="form-control" placeholder="Clave Nueva">
         </div>
         <div class="form-group">
-            <label for="pregunta_id">Pregunta Secreta</label>
+            <label for="pregunta_id">Cambiar Pregunta Secreta</label>
             <select name="pregunta_id" ng-model="nuevo.pregunta_id" id="pregunta_id" class="form-control">
                 <option value="">Seleccione...</option>
                 <option value="1">Nombre de su madre</option>
@@ -20,7 +20,7 @@
             </select>
         </div>
         <div class="form-group">
-            <label>Respuesta</label>
+            <label>Cambiar Respuesta</label>
             <input type="text" ng-model="nuevo.respuesta" placeholder="Respuesta" class="form-control">
         </div>
         <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-save"></span> Actualizar</button>

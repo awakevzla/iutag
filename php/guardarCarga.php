@@ -25,6 +25,12 @@
 	}
 
 	$db->commit();
+	session_start();
+	$auditoria["id_usuario"]=$_SESSION["usuario"]["cod_usuario"];
+	$auditoria["evento"]="REGISTRAR";
+	$auditoria["ip"]=get_client_ip();
+	$auditoria["descripcion"]="REGISTRO DE CARGAS";
+	registro_operacion($auditoria);
 
 	json($carga);
 

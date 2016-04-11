@@ -47,3 +47,12 @@
     <h1 data-ng-if="usuarios.length == 0">No hay unidades curriculares almacenadas.</h1>
 
 </div>
+<div class="modal fade" id="enviando" style="padding: 0;margin: 0;">
+	<div class="modal-dialog" >
+		<div class="modal-content" style="padding: 0;margin: 0;">
+			<div class="modal-body" style="text-align: center;">
+				<img src="img/cargando.gif" alt="" style="padding: 0;margin: 0;">
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

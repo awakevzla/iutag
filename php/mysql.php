@@ -1,6 +1,6 @@
 <?php
-define("usuario_pdo", "root");
-define("clave_pdo", "");
+define("usuario_pdo", "efrain");
+define("clave_pdo", "123456");
 define("db_pdo", "iutag");
 	header('Content-Type: application/json');
 

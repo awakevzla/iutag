@@ -234,6 +234,9 @@
       },
       "respuesta": {
         "type": "varchar(150)"
+      },
+      "tipo": {
+        "type": "enum('administrador','operador')"
       }
     },
     "opt": {

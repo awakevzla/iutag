@@ -13,7 +13,12 @@
 		$aula = array("cod_aula" => $cod_aula);
 
 	})->commit();
-
+	session_start();
+	$auditoria["id_usuario"]=$_SESSION["usuario"]["cod_usuario"];
+	$auditoria["evento"]="MODIFICAR";
+	$auditoria["ip"]=get_client_ip();
+	$auditoria["descripcion"]="MODIFICACIÓN DE AULA, AULA: ".$_POST["nombre"];
+	registro_operacion($auditoria);
 	json($aula);
 
 

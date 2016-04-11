@@ -36,11 +36,21 @@ addController({
             data_ch["intentos"] = 0;
             data_ch["baneado"] = 0;
             data_ch["correo"] = usuario.correo;
-            if (confirm("¿Está seguro de restaurar contraseña?"))
+            if (confirm("¿Está seguro de restaurar contraseña?")) {
+                $("#enviando").modal();
                 db.post("php/restaurarClaveUsuario.php", data_ch, function (data) {
-
-                    console.log(data);
+                    $("#enviando").modal("hide");
+                    if (data.cod_usuario == 1) {
+                        alert("Se ha enviado la nueva clave a su correo electrónico!");
+                        location.reload();
+                        return;
+                    } else {
+                        alert("Ha ocurrido un error, intente nuevamente o comuníquese con el administrador!");
+                        location.reload();
+                        return;
+                    }
                 })
+            }
 
         }
 
@@ -80,6 +90,7 @@ addController({
                         return;
 
                     }
+                    console.log(data);
 
                     if (!!data && !!data.cod_usuario) {
                         alert("Información actualizada!");

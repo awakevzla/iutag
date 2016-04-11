@@ -51,7 +51,7 @@
 				<option value="4">Lugar de nacimiento</option>
 			</select>
 		</div>
-		<div class="form-group">
+		<div data-ng-if="!nuevo.cod_usuario" class="form-group">
 			<label>Respuesta</label>
 			<input type="text" name="respuesta" ng-model="nuevo.respuesta" required placeholder="Respuesta" class="form-control">
 		</div>

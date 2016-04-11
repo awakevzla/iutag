@@ -32,7 +32,6 @@ for ($i = 0; $i < 2; $i++) {
 for ($i = 0; $i < 2; $i++) {
     $clave .= $stringNumber[rand(0, strlen($stringNumber) - 1)];
 }
-
 $db
     ->add("usuario")
     ->select()
@@ -73,10 +72,10 @@ if(!$mail->Send()) {//finalmente enviamos el email
         $usuario = array("cod_usuario" => $cod_usuario);
 
     })->commit();
-    /*$auditoria["id_usuario"]=$datos["cod_usuario"];
+    $auditoria["id_usuario"]=$datos["cod_usuario"];
     $auditoria["evento"]="REGISTRAR";
     $auditoria["ip"]=get_client_ip();
     $auditoria["descripcion"]="RESTAURACION DE CLAVE, USUARIO: ".$datos["usuario"];
-    registro_operacion($auditoria);*/
+    registro_operacion($auditoria);
     echo json_encode($respuesta);
 }

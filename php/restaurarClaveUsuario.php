@@ -62,6 +62,12 @@ if(!$mail->Send()) {//finalmente enviamos el email
         $usuario = array("cod_usuario" => $cod_usuario);
 
     })->commit();
+    session_start();
+    $auditoria["id_usuario"]=$_SESSION["usuario"]["cod_usuario"];
+    $auditoria["evento"]="MODIFICAR";
+    $auditoria["ip"]=get_client_ip();
+    $auditoria["descripcion"]="RESTAURACIÓN DE CLAVE, CODIGO USUARIO:".$_POST["cod_usuario"];
+    registro_operacion($auditoria);
 
     json($usuario);
 }
